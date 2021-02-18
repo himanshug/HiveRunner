@@ -36,7 +36,7 @@ public class ToUpperCaseSerDe extends AbstractSerDe {
     private List<String> columns;
 
     @Override
-    public void initialize(Configuration configuration, Properties properties) throws SerDeException {
+    public void initialize(Configuration configuration, Properties properties, Properties partitionProperties) throws SerDeException {
         columns = Arrays.asList(((String) properties.get(serdeConstants.LIST_COLUMNS)).split(","));
     }
 

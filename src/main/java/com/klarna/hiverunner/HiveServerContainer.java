@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2013-2020 Klarna AB
+ * Copyright (C) 2013-2021 Klarna AB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,6 +79,11 @@ public class HiveServerContainer {
         for (Map.Entry<String, String> property : testConfig.entrySet()) {
             hiveConf.set(property.getKey(), property.getValue());
         }
+
+        hiveConf.set("hive.execution.engine", "tez");
+        hiveConf.set("hive.tez.container.size", "1");
+        //hiveConf.set("hive.zookeeper.quorum", "localhost");
+        //hiveConf.set("hive.execution.mode", "llap");
 
         try {
             hiveServer2 = new HiveServer2();

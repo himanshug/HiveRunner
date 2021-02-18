@@ -146,6 +146,7 @@ public class StandaloneHiveServerContext implements HiveServerContext {
      * Tez local mode settings
      */
     conf.setBoolean(TezConfiguration.TEZ_LOCAL_MODE, true);
+    conf.setBoolean(TezConfiguration.TEZ_LOCAL_MODE_WITHOUT_NETWORK, true);
     conf.set("fs.defaultFS", "file:///");
     conf.setBoolean(TezRuntimeConfiguration.TEZ_RUNTIME_OPTIMIZE_LOCAL_FETCH, true);
 
