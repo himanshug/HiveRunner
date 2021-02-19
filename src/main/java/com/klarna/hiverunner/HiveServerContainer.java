@@ -85,6 +85,7 @@ public class HiveServerContainer {
 
         hiveConf.set("hive.execution.mode", "llap");
         hiveConf.set("hive.llap.daemon.service.hosts", "@localhost");
+        hiveConf.set("hive.zookeeper.quorum", "localhost"); // zk registry needs it anyways.
 
         try {
             hiveServer2 = new HiveServer2();
