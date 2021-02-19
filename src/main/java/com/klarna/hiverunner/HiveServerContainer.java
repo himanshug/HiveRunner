@@ -82,8 +82,9 @@ public class HiveServerContainer {
 
         hiveConf.set("hive.execution.engine", "tez");
         hiveConf.set("hive.tez.container.size", "1");
-        //hiveConf.set("hive.zookeeper.quorum", "localhost");
-        //hiveConf.set("hive.execution.mode", "llap");
+
+        hiveConf.set("hive.execution.mode", "llap");
+        hiveConf.set("hive.llap.daemon.service.hosts", "@localhost");
 
         try {
             hiveServer2 = new HiveServer2();
