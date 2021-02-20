@@ -80,12 +80,25 @@ public class HiveServerContainer {
             hiveConf.set(property.getKey(), property.getValue());
         }
 
+        // This decides...
+        // - which TaskCompiler impl would be used
+        // and probably more.
         hiveConf.set("hive.execution.engine", "tez");
         hiveConf.set("hive.tez.container.size", "1");
 
         hiveConf.set("hive.execution.mode", "llap");
-        hiveConf.set("hive.llap.daemon.service.hosts", "@localhost");
+
+        // these decide whether it is ok to run the tasks in AM itself
+        // Maybe see LlapDecider, LlapDecisionDispatcher
+        hiveConf.set("hive.llap.execution.mode", "all");
+        hiveConf.set("hive.llap.auto.allow.uber", "false");
+
+        hiveConf.set("hive.llap.daemon.service.hosts", "@llap01_MiniLlapCluster");
         hiveConf.set("hive.zookeeper.quorum", "localhost"); // zk registry needs it anyways.
+
+        // Fix, "java.lang.IllegalArgumentException: No running LLAP daemons! Please check LLAP service status and zookeeper configuration"
+//        hiveConf.set("hive.llap.zk.registry.user", "hgupta");
+//        hiveConf.set("hive.llap.zk.registry.namespace", "llap-unsecure");
 
         try {
             hiveServer2 = new HiveServer2();
